@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.flyingsoftgames.adbuddizplugin" version="2.0.4">
+ 
+ <name>AdBuddiz Plugin</name>
+ <description>AdBuddiz plugin.</description>
+ <author>Michael Romanovsky</author>
+ <license>MIT</license>
+ <keywords>ad,AdBuddiz,google,play,services</keywords>
+ <repo>https://github.com/agamemnus/cordova-plugin-AdBuddiz.git</repo>
+ <issue>https://github.com/agamemnus/cordova-plugin-AdBuddiz/issues</issue>
+ 
+ <engines><engine name="cordova" version=">=2.9" /></engines>
+ 
+ <js-module src="www/adbuddizplugin.js" name="AdBuddizPlugin">
+  <clobbers target="window.plugins.AdBuddizPlugin" />
+ </js-module>
+ 
+ <!-- android -->
+ <platform name="android">
+  <config-file target="res/xml/config.xml" parent="/*">
+   <feature name="AdBuddizPlugin">
+    <param name="android-package" value="com.flyingsoftgames.adbuddizplugin.AdBuddizPlugin" />
+   </feature>
+  </config-file>
+  <source-file src="src/android/AdBuddizPlugin.java" target-dir="src/com/flyingsoftgames/adbuddizplugin" />
+  <config-file target="AndroidManifest.xml" parent="/manifest">
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  </config-file>
+ </platform>
+</plugin>

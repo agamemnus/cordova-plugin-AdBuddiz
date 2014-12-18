@@ -84,7 +84,7 @@ public class AdBuddizPlugin extends CordovaPlugin {
  
  // Keep checking if an ad is ready to show. If it is, run the onReceiveInterstitialAd event.
  private void testIsReadyToShowAd () {
-  if (AdBuddiz.isReadyToShowAd(cordova.getActivity())) {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onReceiveInterstitialAd');"); return;}
+  if (AdBuddiz.isReadyToShowAd(cordova.getActivity())) {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onReceiveInterstitialAd', {'ad_network': 'adbuddiz'});"); return;}
   cordova.getActivity().getWindow().getDecorView().postDelayed(new Runnable () {
    @Override public void run () {testIsReadyToShowAd ();}
   }, 250);
@@ -113,11 +113,11 @@ public class AdBuddizPlugin extends CordovaPlugin {
  
  // This class implements the AdBuddizPlugin ad listener events.  It forwards the events to the JavaScript layer.
  class AdListener implements AdBuddizDelegate {
-  @Override public void didFailToShowAd (AdBuddizError errorCode) {webView.loadUrl (String.format("javascript:cordova.fireDocumentEvent('onFailedToReceiveAd', { 'error': %s' });", getErrorReason(errorCode)));}
+  @Override public void didFailToShowAd (AdBuddizError errorCode) {webView.loadUrl (String.format("javascript:cordova.fireDocumentEvent('onFailedToReceiveAd', {'ad_network': 'adbuddiz', 'error': %s'});", getErrorReason(errorCode)));}
   @Override public void didCacheAd      ()                        {}
-  @Override public void didShowAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onPresentInterstitialAd');");}
-  @Override public void didHideAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onDismissInterstitialAd');");}
-  @Override public void didClick        ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onLeaveToInterstitialAd');");}
+  @Override public void didShowAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onPresentInterstitialAd', {'ad_network': 'adbuddiz'});");}
+  @Override public void didHideAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onDismissInterstitialAd', {'ad_network': 'adbuddiz'});");}
+  @Override public void didClick        ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onLeaveToInterstitialAd', {'ad_network': 'adbuddiz'});");}
  }
  
  // Gets a string error reason from an error code.

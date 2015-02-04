@@ -113,7 +113,7 @@ public class AdBuddizPlugin extends CordovaPlugin {
  
  // This class implements the AdBuddizPlugin ad listener events.  It forwards the events to the JavaScript layer.
  class AdListener implements AdBuddizDelegate {
-  @Override public void didFailToShowAd (AdBuddizError errorCode) {webView.loadUrl (String.format("javascript:cordova.fireDocumentEvent('onFailedToReceiveAd', {'ad_network': 'adbuddiz', 'error': %s'});", getErrorReason(errorCode)));}
+  @Override public void didFailToShowAd (AdBuddizError errorCode) {webView.loadUrl (String.format("javascript:cordova.fireDocumentEvent('onFailedToReceiveAd', {'ad_network': 'adbuddiz', 'error': '%s'});", getErrorReason(errorCode)));}
   @Override public void didCacheAd      ()                        {}
   @Override public void didShowAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onPresentInterstitialAd', {'ad_network': 'adbuddiz'});");}
   @Override public void didHideAd       ()                        {webView.loadUrl ("javascript:cordova.fireDocumentEvent('onDismissInterstitialAd', {'ad_network': 'adbuddiz'});");}
